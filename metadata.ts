@@ -1,11 +1,14 @@
 import 'reflect-metadata';
 
-const plane = {
-  color: 'red',
-};
+class Plane {
+  color: string = 'red';
 
-Reflect.defineMetadata('note', 'hi there', plane);
+  @markFunction
+  fly(): void {
+    console.log('vrrrr');
+  }
+}
 
-const note = Reflect.getMetadata('note', plane);
-
-console.log(note);
+function markFunction(target: Plane, key: string) {
+  Reflect.defineMetadata('secret', 123, target, key);
+}
